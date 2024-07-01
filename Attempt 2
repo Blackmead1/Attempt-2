@@ -1,0 +1,21 @@
+-- Function to make a player sit down
+local function makePlayerSit(player)
+    if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+        local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+        humanoid:ChangeState(Enum.HumanoidStateType.Seated)
+    end
+end
+
+-- Function to make all players in the game sit down
+local function makeAllPlayersSit()
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        makePlayerSit(player)
+    end
+end
+
+-- Activate sitting (for example, bind to a key press)
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.S then -- Change the key as needed
+        makeAllPlayersSit()
+    end
+end)
